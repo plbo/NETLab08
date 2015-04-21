@@ -1,0 +1,162 @@
+﻿<Window x:Class="WpfIntro.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfIntro="clr-namespace:WpfIntro" Title="Przykłady z podstaw WPF" Width="750" Height="500">
+
+    <TabControl Margin="10">
+
+        <TabItem FontSize="18" Header="Grid i inne panele">
+            <Grid Margin="5,5,0,0" ShowGridLines="{Binding ElementName=_gridLines, Path=IsChecked}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="16" FontWeight="Bold"
+                           Text="StackPanel" />
+
+
+                <ScrollViewer Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Rectangle Width="50" Height="50" Margin="5" Fill="Red" />
+                        <Rectangle Width="50" Height="50" Margin="5" Fill="Green" />
+                        <Rectangle Width="50" Height="50" Margin="5" Fill="Blue" />
+                        <Rectangle Width="50" Height="50" Margin="5" Fill="Yellow" />
+                    </StackPanel>
+                </ScrollViewer>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" FontSize="16" FontWeight="Bold"
+                           Text="WrapPanel" />
+
+                <WrapPanel Grid.Row="1" Grid.Column="1">
+                    <Rectangle Width="50" Height="50" Margin="5" Fill="Red" />
+                    <Rectangle Width="50" Height="50" Margin="5" Fill="Green" />
+                    <Rectangle Width="50" Height="50" Margin="5" Fill="Blue" />
+                    <Rectangle Width="50" Height="50" Margin="5" Fill="Yellow" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" FontSize="16" FontWeight="Bold"
+                           Text="DockPanel" />
+
+                <DockPanel Grid.Row="1" Grid.Column="2" LastChildFill="False">
+                    <Rectangle Width="50" Height="50" Margin="5" DockPanel.Dock="Bottom"
+                               Fill="Red" />
+                    <Rectangle Width="50" Height="50" Margin="5" DockPanel.Dock="Bottom"
+                               Fill="Green" />
+                    <Rectangle Width="50" Height="50" Margin="5" DockPanel.Dock="Right"
+                               Fill="Blue" />
+                    <Rectangle Width="50" Height="50" Margin="5" DockPanel.Dock="Left"
+                               Fill="Yellow" />
+                </DockPanel>
+
+                <Expander Grid.Row="1" Grid.Column="3" ExpandDirection="Right" Header="Opcje">
+                    <StackPanel>
+                        <ToggleButton Name="_gridLines" Margin="5" Content="Pokaż linie podziału" IsChecked="False"
+                                      Padding="5" />
+                    </StackPanel>
+                </Expander>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" FontSize="20"
+                           Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=Title, StringFormat=Tytuł okna: {0}}" />
+            </Grid>
+        </TabItem>
+
+        <TabItem FontSize="18" Header="UniformGrid">
+            <Border Margin="10" BorderBrush="GreenYellow" BorderThickness="2" Padding="5">
+                <UniformGrid Columns="2">
+                    <Rectangle Margin="5" Fill="Red" />
+                    <Rectangle Margin="5" Fill="Green" />
+                    <Rectangle Margin="5" Fill="Blue" />
+                    <Rectangle Margin="5" Fill="Yellow" />
+                </UniformGrid>
+            </Border>
+        </TabItem>
+
+        <TabItem FontSize="18" Header="Canvas">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Canvas Name="płótno" Grid.Row="0">
+                    <Rectangle Canvas.Left="20" Canvas.Top="20" Width="50" Height="50"
+                               Margin="5" Fill="Red" />
+                    <Rectangle Canvas.Left="40" Canvas.Top="40" Width="50" Height="50"
+                               Margin="5" Fill="Green" />
+                    <Rectangle Canvas.Left="60" Canvas.Top="60" Width="50" Height="50"
+                               Margin="5" Fill="Blue" />
+                    <Rectangle Canvas.Left="80" Canvas.Top="80" Width="50" Height="50"
+                               Margin="5" Fill="Yellow" />
+                </Canvas>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Margin="5" VerticalAlignment="Center" Text="Tło: " />
+                    <RadioButton Margin="5" VerticalContentAlignment="Center" Checked="ZmieńKolorTła" Content="Białe"
+                                 GroupName="Kolory" IsChecked="True" Tag="{x:Static Brushes.White}" />
+                    <RadioButton Margin="5" VerticalContentAlignment="Center" Checked="ZmieńKolorTła" Content="Czarne"
+                                 GroupName="Kolory" Tag="{x:Static Brushes.Black}" />
+                    <RadioButton Margin="5" VerticalContentAlignment="Center" Checked="ZmieńKolorTła" Content="Różowe"
+                                 GroupName="Kolory" Tag="{x:Static Brushes.DeepPink}" />
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem FontSize="18" Header="ViewBox">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0" Margin="10" Stretch="{Binding ElementName=_viewboxStretch, Path=SelectedItem}">
+                    <Canvas Width="120" Height="120">
+                        <Rectangle Canvas.Left="0" Canvas.Top="0" Width="50" Height="50"
+                                   Margin="5" Fill="Red" />
+                        <Rectangle Canvas.Top="0" Canvas.Right="0" Width="50" Height="50"
+                                   Margin="5" Fill="Green" />
+                        <Rectangle Canvas.Left="0" Canvas.Bottom="0" Width="50" Height="50"
+                                   Margin="5" Fill="Blue" />
+                        <Rectangle Canvas.Right="0" Canvas.Bottom="0" Width="50" Height="50"
+                                   Margin="5" Fill="Yellow" />
+                    </Canvas>
+                </Viewbox>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Stretch: " />
+                    <ComboBox Name="_viewboxStretch" SelectedIndex="3">
+                        <Stretch>None</Stretch>
+                        <Stretch>Fill</Stretch>
+                        <Stretch>Uniform</Stretch>
+                        <Stretch>UniformToFill</Stretch>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem FontSize="18" Header="Binding">
+            <Grid Margin="5,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ListBox Name="_list" Margin="5" ItemsSource="{Binding Kolekcja}" SelectedItem="{Binding WybranyObiekt}" />
+
+                <DockPanel Grid.Column="1" Margin="5" DataContext="{Binding ElementName=_list, Path=SelectedItem}" LastChildFill="False">
+                    <wpfIntro:EdytorObiektuDanych DockPanel.Dock="Top" />
+
+                    <Button Margin="5" Click="ZapiszObiektDanych" DockPanel.Dock="Bottom" FontSize="16"
+                            Padding="5">
+                        Zapisz
+                    </Button>
+                </DockPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

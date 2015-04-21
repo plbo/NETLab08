@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="WpfIntro.EdytorObiektuDanych" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpfIntro="clr-namespace:WpfIntro"
+             d:DataContext="{d:DesignInstance {x:Type wpfIntro:ObiektDanych}}" d:DesignHeight="300" d:DesignWidth="300" mc:Ignorable="d">
+
+    <GroupBox Header="Obiekt danych">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Nazwa" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Nazwa}" />
+
+            <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Identyfikator" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Identyfikator}" />
+
+            <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Data" />
+            <DatePicker Grid.Row="2" Grid.Column="1" Margin="5" SelectedDate="{Binding Data}" />
+
+            <Label Grid.Row="3" Grid.Column="0" Margin="5" Content="Czy aktywny" />
+            <CheckBox Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                      IsChecked="{Binding CzyAktywny}" />
+        </Grid>
+    </GroupBox>
+</UserControl>
